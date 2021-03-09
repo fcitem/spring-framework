@@ -60,6 +60,7 @@ public class BeanDefinitionReaderUtils {
 		GenericBeanDefinition bd = new GenericBeanDefinition();
 		bd.setParentName(parentName);
 		if (className != null) {
+			//classLoader不为空则加载类，否则只设置名称
 			if (classLoader != null) {
 				bd.setBeanClass(ClassUtils.forName(className, classLoader));
 			}
@@ -106,9 +107,11 @@ public class BeanDefinitionReaderUtils {
 
 		String generatedBeanName = definition.getBeanClassName();
 		if (generatedBeanName == null) {
+			//父类不为空则取parent名称+$child
 			if (definition.getParentName() != null) {
 				generatedBeanName = definition.getParentName() + "$child";
 			}
+			//否则取factory名称+$created
 			else if (definition.getFactoryBeanName() != null) {
 				generatedBeanName = definition.getFactoryBeanName() + "$created";
 			}
