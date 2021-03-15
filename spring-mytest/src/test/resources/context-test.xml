@@ -6,13 +6,13 @@
 
 	<bean class="context.component.BeanDependComponent" id="dependComponent">
 		<constructor-arg index="0" value="depend"/>
-		<property name="myTestBean" value="myTestBean"/>
+		<property name="myTestBean" ref="myTestBean"/>
 	</bean>
 	<bean id="myTestBean" class="context.component.MyTestBean">
 		<!--测试meta标签-->
 		<meta key="special-data" value="sprecial stragey"/>
 		<property name="name" value="dbw"/>
-		<property name="beanDependComponent" value="dependComponent"/>
+		<property name="beanDependComponent" ref="dependComponent"/>
 	</bean>
 	<alias name="myTestBean" alias="testBean"/>
 
